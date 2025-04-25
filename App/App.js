@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import Icone from '@expo/vector-icons/Feather';
 
 export default function App() {
   const[tarefas, setTarefas] = useState([]);
@@ -33,17 +34,18 @@ export default function App() {
           onChangeText={setNovaTarefa}
         />
         <TouchableOpacity style={styles.botao} onPress={adicionarTarefa}>
-          <Text style={{ fontSize: 17, color: "#FFF" }}>Adicionar</Text>
+          <Text style={{ fontSize: 17, color: "#000" }}>Adicionar</Text>
         </TouchableOpacity>
       </View>
       <FlatList 
-        style={{ width: 350 }}
+        style={{ width: 380 }}
         data={tarefas}
         keyExtractor={(item)=> item.id}
         renderItem={({item})=> (
           <View style={styles.tarefa}>
             <Text style={{ fontSize: 20 }}>{item.texto}</Text>
             <TouchableOpacity style={styles.botaoExcluir} onPress={()=> excluirTarefa(item.id)}>
+              <Icone name='trash-2' size={20} color={"#FFF"}/>
               <Text style={{ fontSize: 16, color: "#FFF" }}>Excluir</Text>
             </TouchableOpacity>
           </View>
@@ -61,10 +63,11 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 40,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 100
   },
   input: {
-    width: 250,
+    width: 270,
     height: 50,
     borderRadius: 5,
     backgroundColor: '#EEE',
@@ -76,12 +79,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#292929'
+    backgroundColor: 'dodgerblue'
   },
   tarefa: {
     alignItems: 'center', 
     justifyContent: 'space-between', 
-    flexDirection: 'row'
+    flexDirection: 'row',
+    margin: 5
   },
   botaoExcluir: {
     width: 100,
@@ -89,6 +93,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#EA0000'
+    flexDirection: 'row',
+    backgroundColor: '#EA0000',
+    gap: 5
   }
 });
